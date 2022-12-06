@@ -20,6 +20,37 @@
                         break;
                 }
             }
+
+            function playRound(playerSelection, computerSelection) {
+                playerSelection = playerSelection.toLowerCase();
+                computerSelection = computerSelection.toLowerCase();
+                if(playerSelection == "rock") {
+                    if(computerSelection == "scissors") 
+                        return "Good job! You've won, " + playerSelection + " beats " + computerSelection + "!";
+                    else if(computerSelection == "paper")
+                        return "Oh no! You've lost, " + computerSelection + " beats " + playerSelection + "!";
+                    else
+                        return "Uh-oh! It's a draw, " + playerSelection + " vs " + computerSelection + "!";
+                }
+
+                if(playerSelection == 'paper') {
+                    if(computerSelection == "rock") 
+                        return "Good job! You've won, " + playerSelection + " beats " + computerSelection + "!";
+                    else if(computerSelection == "scissors")
+                        return "Oh no! You've lost, " + computerSelection + " beats " + playerSelection + "!";
+                    else
+                        return "Uh-oh! It's a draw, " + playerSelection + " vs " + computerSelection + "!";
+                }
+
+                if(playerSelection == 'scissors') {
+                    if(computerSelection == "paper") 
+                        return "Good job! You've won, " + playerSelection + " beats " + computerSelection + "!";
+                    else if(computerSelection == "rock")
+                        return "Oh no! You've lost, " + computerSelection + " beats " + playerSelection + "!";
+                    else
+                        return "Uh-oh! It's a draw, " + playerSelection + " vs " + computerSelection + "!";
+                }
+            }
         </script>
     </body>
 </html>
