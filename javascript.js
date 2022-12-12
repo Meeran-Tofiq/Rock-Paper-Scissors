@@ -1,9 +1,9 @@
-const rock = docuement.querySelector('.rock');
-const paper = docuement.querySelector('.paper');
-const scissors = docuement.querySelector('.scissors');
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissors = document.querySelector('.scissors');
 const scoreTally = document.querySelector('.score');
-const computerSelection = '';
 
+let computerSelection = '';
 let score = 0;
 
 rock.addEventListener('click', () =>{
@@ -36,32 +36,30 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
+
+    console.log(playerSelection + "    vs    " + computerSelection);
+
     if(playerSelection == "rock") {
         if(computerSelection == "scissors") 
-            window.score += 1;
+            score += 1;
         else if(computerSelection == "paper")
-            window.score -= 1;
-        else
-            return;
+            score -= 1;
     }
 
     if(playerSelection == 'paper') {
         if(computerSelection == "rock") 
-        window.score += 1;
+        score += 1;
         else if(computerSelection == "scissors")
-        window.score -= 1;
-        else
-            return;
+        score -= 1;
     }
 
     if(playerSelection == 'scissors') {
         if(computerSelection == "paper") 
-        window.score += 1;
+        score += 1;
         else if(computerSelection == "rock")
-        window.score -= 1;
-        else
-            return 0;
+        score -= 1;
     }
+    scoreTally.textContent = score;
 }
 
 function game() {
