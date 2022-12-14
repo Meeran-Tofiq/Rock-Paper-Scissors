@@ -1,25 +1,23 @@
 const rock = document.querySelector('.rock');
 const paper = document.querySelector('.paper');
 const scissors = document.querySelector('.scissors');
-const scoreTally = document.querySelector('.score');
+const playerTally = document.querySelector('.player-score');
+const computerTally = document.querySelector('.computer-score');
+const gameOverText = document.querySelector(".game-over");
+const winner = document.querySelector("h1#winner");
+
+playerTally.textContent = 0;
+computerTally.textContent = 0;
 
 let computerSelection = '';
-let score = 0;
+let gameOver = false;
+let tally = [0, 0];
 
-rock.addEventListener('click', () =>{
-    computerSelection = getComputerChoice();
-    playRound('rock', computerSelection);
-});
+rock.addEventListener('click', () => {game("rock")});
 
-paper.addEventListener('click', () =>{
-    computerSelection = getComputerChoice();
-    playRound('paper', computerSelection);
-});
+paper.addEventListener('click', () => {game("paper")});
 
-scissors.addEventListener('click', () =>{
-    computerSelection = getComputerChoice();
-    playRound('scissors', computerSelection);
-}); 
+scissors.addEventListener('click', () => {game("scissors")}); 
 
 function getComputerChoice() {
     let random = Math.floor(Math.random() * 3) + 1;
@@ -37,31 +35,53 @@ function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
 
-    console.log(playerSelection + "    vs    " + computerSelection);
+    if(computerSelection === playerSelection || tally[0] === 5 || tally[1] === 5)
+        return tally;
 
     if(playerSelection == "rock") {
         if(computerSelection == "scissors") 
-            score += 1;
+            tally[0] += 1;
         else if(computerSelection == "paper")
-            score -= 1;
+            tally[1] += 1;
     }
 
     if(playerSelection == 'paper') {
         if(computerSelection == "rock") 
-        score += 1;
+            tally[0] += 1;
         else if(computerSelection == "scissors")
-        score -= 1;
+            tally[1] += 1;
     }
 
     if(playerSelection == 'scissors') {
         if(computerSelection == "paper") 
-        score += 1;
+            tally[0] += 1;
         else if(computerSelection == "rock")
-        score -= 1;
+            tally[1] += 1;
     }
-    scoreTally.textContent = score;
+
+    return tally;
 }
 
-function game() {
-    
+function game(playerSelection) {
+    if(gameOver) {
+        gameOverText.textContent = "The game is done.";
+        return;
+    }
+
+    let tally = [];
+
+    computerSelection = getComputerChoice();
+        
+    tally = playRound(playerSelection, computerSelection);
+
+    playerTally.textContent = +tally[0];
+    computerTally.textContent = +tally[1];
+
+    if(tally[0] == 5) {
+        winner.textContent += "HUMAN PLAYER!";
+        gameOver = true;
+    } else if(tally[1] == 5) {
+        winner.textContent += "ROBOT PLAYER!";
+        gameOver = true;
+    }
 }
